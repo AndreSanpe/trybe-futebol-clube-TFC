@@ -29,17 +29,15 @@ describe('Testing login route', () => {
   // })
   describe('First we are going to test the "/" route', () => {
       it('testing if the we can access the route /', async () => {
-        chaiHttpResponse = await chai.request(app).get('/')
-        console.log(chaiHttpResponse);
-        
-        expect(chaiHttpResponse).to.equal(201);
+        chaiHttpResponse = await chai.request(app).get('/')        
+        expect(chaiHttpResponse.status).to.equal(200);
       });
   
   })
   describe('test the "/login" route', () => {
     it('testing if the we can access the route "/login"', async () => {
       chaiHttpResponse = await chai.request(app).post('/login')
-      expect(chaiHttpResponse).to.equal(201);
+      expect(chaiHttpResponse.status).to.equal(201);
     });
 
 })
