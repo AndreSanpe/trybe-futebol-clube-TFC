@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import UserController from '../controller';
 
 const router = Router();
 
-router.post('/login', (_req, res) => {
-  res.sendStatus(201);
-});
+const useController = new UserController();
+
+router.post('/login', useController.getUser);
 
 export default router;
