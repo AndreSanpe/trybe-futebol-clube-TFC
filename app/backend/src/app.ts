@@ -1,5 +1,5 @@
 import * as express from 'express';
-import UserRouter from './routes/UserRoute';
+import UserRouter from './routes/user.route';
 
 class App {
   public app: express.Express;
@@ -8,8 +8,6 @@ class App {
     this.app = express();
 
     this.config();
-
-    this.app.use(express.json());
 
     this.app.use(UserRouter);
     // Não remover essa rota
