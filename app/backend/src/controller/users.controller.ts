@@ -1,20 +1,14 @@
-// import { Request, Response } from 'express';
-// // import { StatusCodes } from './statusCodes';
-// import UserService from '../services/users.service';
+import { Request, Response } from 'express';
+import UserService from '../services/users.service';
 
-// class UsersController {
-//   constructor(private userService = new UserService()) { }
+class UsersController {
+  constructor(private userService = new UserService()) { }
 
-//   public addUser = async (req: Request, res: Response) => {
-//     const item = req.body;
-//     const user = await this.userService.addUser(item);
-//     res.status(201).json({ token: user });
-//   };
+  public getUser = async (req: Request, res: Response) => {
+    // const { password, email } = req.body;
+    // const user = await this.userService.login(email, password);
+    res.sendStatus(201);
+  };
+}
 
-//   // public getAllProducts = async (_req: Request, res: Response) => {
-//   //   const products = await this.productService.getAllProducts();
-//   //   res.status(200).json(products);
-//   // };
-// }
-
-// export default UsersController;
+export default UsersController;
