@@ -1,3 +1,4 @@
-import UsersController from './users.controller';
+import UserController from './users.controller';
+import ValidateController from './validate.controller';
 
-export default UsersController;
+export { UserController, ValidateController };
