@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs';
-import { ILogin, IUserRole } from '../interfaces/IUser';
+import { ILogin } from '../interfaces/IUser';
 import User from '../database/models/User';
 import HttpError from '../utils/HttpError';
 import TokerManager from '../utils/jwt.util';

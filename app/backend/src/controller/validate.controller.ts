@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import HttpError from '../utils/HttpError';
-import UserService from '../services/users.service';
+import { UserService } from '../services';
 
 class ValidateController {
   constructor(private userService = new UserService()) { }

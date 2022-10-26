@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import UserService from '../services/users.service';
+import { UserService } from '../services';
 
 class UsersController {
   constructor(private userService = new UserService()) { }
