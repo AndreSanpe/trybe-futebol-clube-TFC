@@ -1,12 +1,19 @@
 import IUser from '../interfaces/IUser';
 import Users from '../database/models/Users';
+import HttpError from '../utils/HttpError';
+import TokerManager from '../utils/jwt.util';
 
 class LoginService {
   // private model = Users;
   // this implementation was suggested by Junior.
-  public login = async ({ email }: IUser) => {
+  public login = async ({ email, password }: IUser) => {
     const user = await Users.findOne({ where: { email } });
-    return user;
+
+    if (!user) { throw new HttpError(401, 'Username or password invalid'); }
+
+    const token = TokerManager.create({ email, password });
+
+    return token;
   };
 }
 
