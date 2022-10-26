@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import UserRouter from './routes/user.route';
 import errorMiddleware from './middleware/errorMiddleware';
 
