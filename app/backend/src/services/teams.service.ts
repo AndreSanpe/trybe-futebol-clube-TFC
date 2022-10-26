@@ -11,6 +11,14 @@ class TeamService {
 
     return teams;
   };
+
+  public getOneTeam = async (id:number) => {
+    const team = await Team.findOne({ where: { id } });
+
+    if (!team) { throw new HttpError(401, errorMessage); }
+
+    return team;
+  };
 }
 
 export default TeamService;
