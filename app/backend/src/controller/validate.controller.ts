@@ -1,17 +1,23 @@
 import { NextFunction, Request, Response } from 'express';
+import HttpError from '../utils/HttpError';
 import UserService from '../services/users.service';
 
-class UsersController {
+class ValidateController {
   constructor(private userService = new UserService()) { }
 
-  public getUser = async (req: Request, res: Response, next: NextFunction) => {
+  public validateUser = async (req: Request, res: Response, next: NextFunction) => {
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+      return new HttpError(401, 'Invalid authorization');
+    }
     try {
-      const token = await this.userService.login(req.body);
-      return res.status(200).json({ token });
+      const { data: { role } } = this.userService.validate(authorization);
+      return res.status(200).json({ role });
     } catch (error) {
       return next(error);
     }
   };
 }
 
-export default UsersController;
+export default ValidateController;
