@@ -9,15 +9,15 @@ class LoginService {
   // this implementation was suggested by Junior.
   public login = async ({ email, password: passwordUser }: ILogin) => {
     const user = await User.findOne({ where: { email } });
-    if (!user) { throw new HttpError(401, 'Username or password invalid'); }
-    console.log(user);
 
-    const { password } = user;
+    if (!user) { throw new HttpError(401, 'Incorrect email or password'); }
+
+    const { password, role } = user;
     const passBcrypto = await bcrypt.compare(passwordUser, password);
 
-    if (!passBcrypto) { throw new HttpError(401, 'Username or password invalid'); }
+    if (!passBcrypto) { throw new HttpError(401, 'Incorrect email or password'); }
 
-    const token = TokerManager.create({ email, password });
+    const token = TokerManager.create({ email, role });
 
     return token;
   };
