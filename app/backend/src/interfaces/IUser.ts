@@ -1,4 +1,14 @@
-export default interface IUser {
+interface ILogin {
   password: string;
   email: string;
 }
+
+interface IUser {
+  id: number;
+  email: string;
+  role: string;
+  password: string;
+  username: string;
+}
+
+export { ILogin, IUser };
