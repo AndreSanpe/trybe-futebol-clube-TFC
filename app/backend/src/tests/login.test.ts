@@ -5,10 +5,10 @@ import user from './mocks/mock.user.db';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import UserModel from '../database/models/Users';
+import UserModel from '../database/models/User';
 
 import { Response } from 'superagent';
-import Users from '../database/models/Users';
+import User from '../database/models/User';
 import { IUser } from '../interfaces/IUser';
 
 chai.use(chaiHttp);
@@ -23,7 +23,7 @@ describe('Testing login route', () => {
     sinon
       .stub(UserModel, "findOne")
       .resolves(
-        user as Users
+        user as User
       );
   });
 

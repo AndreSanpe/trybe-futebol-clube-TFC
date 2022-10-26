@@ -1,14 +1,14 @@
 import * as bcrypt from 'bcryptjs';
 import { ILogin } from '../interfaces/IUser';
-import Users from '../database/models/Users';
+import User from '../database/models/User';
 import HttpError from '../utils/HttpError';
 import TokerManager from '../utils/jwt.util';
 
 class LoginService {
-  // private model = Users;
+  // private model = User;
   // this implementation was suggested by Junior.
   public login = async ({ email, password: passwordUser }: ILogin) => {
-    const user = await Users.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email } });
     if (!user) { throw new HttpError(401, 'Username or password invalid'); }
     console.log(user);
 
