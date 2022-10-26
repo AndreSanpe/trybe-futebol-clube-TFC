@@ -8,6 +8,11 @@ interface IVerifyUser {
   email: string;
 }
 
+interface IVerifyRole {
+  data: { email: string; role: string };
+  iat: string;
+}
+
 interface IUser {
   id: number;
   email: string;
@@ -16,4 +21,8 @@ interface IUser {
   username: string;
 }
 
-export { ILogin, IUser, IVerifyUser };
+interface IUserRole {
+  role: string;
+}
+
+export { ILogin, IUser, IVerifyUser, IUserRole, IVerifyRole };
