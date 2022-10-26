@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import * as jwt from 'jsonwebtoken';
-import IUser from '../interfaces/IUser';
+import { ILogin } from '../interfaces/IUser';
 
 export default class TokerManager {
-  public static create({ email, password }: IUser): string {
+  public static create({ email, password }: ILogin): string {
     const userCredentials = { email, password };
 
     const secret = process.env.JWT_SECRET || 'secretToken';
