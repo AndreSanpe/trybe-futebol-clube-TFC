@@ -14,6 +14,6 @@ export default class TokerManager {
   public static verify(token: string) {
     const secret = process.env.JWT_SECRET || 'secretToken';
     const tokenValidation = jwt.verify(token, secret);
-    return tokenValidation as IVerifyUser;
+    return tokenValidation as jwt.JwtPayload;
   }
 }
