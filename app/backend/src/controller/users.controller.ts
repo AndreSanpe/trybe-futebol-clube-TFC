@@ -7,9 +7,9 @@ class UsersController {
   public getUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = await this.userService.login(req.body);
-      res.status(201).json({ token });
+      return res.status(200).json({ token });
     } catch (error) {
-      next(error);
+      return next(error);
     }
   };
 }

@@ -3,6 +3,11 @@ interface ILogin {
   email: string;
 }
 
+interface IVerifyUser {
+  role: string;
+  email: string;
+}
+
 interface IUser {
   id: number;
   email: string;
@@ -11,4 +16,4 @@ interface IUser {
   username: string;
 }
 
-export { ILogin, IUser };
+export { ILogin, IUser, IVerifyUser };
