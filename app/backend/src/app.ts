@@ -1,17 +1,21 @@
 import * as express from 'express';
 import UserRouter from './routes/user.route';
+import errorMiddleware from './middleware/errorMiddleware';
 
 class App {
   public app: express.Express;
 
   constructor() {
     this.app = express();
-
     this.config();
-
-    this.app.use(UserRouter);
     // Não remover essa rota
+    this.routes();
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.InitializeErroHandler();
+  }
+
+  private InitializeErroHandler() {
+    this.app.use(errorMiddleware);
   }
 
   private config():void {
@@ -24,6 +28,10 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+  }
+
+  private routes():void {
+    this.app.use(UserRouter);
   }
 
   public start(PORT: string | number):void {
