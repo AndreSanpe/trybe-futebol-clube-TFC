@@ -1,5 +1,5 @@
 import express from 'express';
-import UserRouter from './routes/user.route';
+import { UserRouter, TeamRouter } from './routes';
 import errorMiddleware from './middleware/errorMiddleware';
 
 class App {
@@ -31,7 +31,7 @@ class App {
   }
 
   private routes():void {
-    this.app.use(UserRouter);
+    this.app.use(UserRouter, TeamRouter);
   }
 
   public start(PORT: string | number):void {
