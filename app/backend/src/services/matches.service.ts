@@ -1,11 +1,11 @@
 import Matche from '../database/models/Matche';
 import Team from '../database/models/Team';
 import HttpError from '../utils/HttpError';
-import IMache from '../interfaces/IMache';
+import IMache from '../interfaces/IMatch';
 
 const errorMessage = 'No matche has been found';
 
-class MatcheService {
+class MatchService {
   public getAllMatches = async () => {
     const matches = await Matche.findAll({
       include: [
@@ -48,6 +48,14 @@ class MatcheService {
 
     return matches;
   };
+
+  public updateMatches = async (id: number) => {
+    const matches = await Matche.update({ inProgress: false }, { where: { id } });
+
+    if (!matches) { throw new HttpError(401, 'No matche has been created'); }
+
+    return matches;
+  };
 }
 
-export default MatcheService;
+export default MatchService;
