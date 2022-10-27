@@ -7,7 +7,7 @@ class TeamsController {
   public getAllTeams = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const allTeams = await this.teamService.getAll();
-      return res.status(200).json({ allTeams });
+      return res.status(200).json(allTeams);
     } catch (error) {
       return next(error);
     }
@@ -17,7 +17,7 @@ class TeamsController {
     const { id } = req.params;
     try {
       const oneTeam = await this.teamService.getOneTeam(Number(id));
-      return res.status(200).json({ oneTeam });
+      return res.status(200).json(oneTeam);
     } catch (error) {
       return next(error);
     }
