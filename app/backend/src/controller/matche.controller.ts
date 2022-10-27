@@ -46,6 +46,15 @@ class MatcheController {
       return next(error);
     }
   };
+
+  public addMatches = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const addMatches = await this.matcheService.addMatches(req.body);
+      return res.status(201).json(addMatches);
+    } catch (error) {
+      return next(error);
+    }
+  };
 }
 
 export default MatcheController;

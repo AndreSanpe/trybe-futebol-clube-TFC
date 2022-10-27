@@ -1,6 +1,7 @@
 import Matche from '../database/models/Matche';
 import Team from '../database/models/Team';
 import HttpError from '../utils/HttpError';
+import IMache from '../interfaces/IMache';
 
 const errorMessage = 'No matche has been found';
 
@@ -29,6 +30,21 @@ class MatcheService {
     });
 
     if (!matches) { throw new HttpError(401, errorMessage); }
+
+    return matches;
+  };
+
+  public addMatches = async ({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals }: IMache) => {
+    const inProgress = true;
+    const matches = await Matche.create({
+      homeTeam,
+      awayTeam,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress,
+    });
+
+    if (!matches) { throw new HttpError(401, 'No matche has been created'); }
 
     return matches;
   };
