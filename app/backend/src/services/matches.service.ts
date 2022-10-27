@@ -5,6 +5,8 @@ import IMache from '../interfaces/IMatch';
 
 const errorMessage = 'No matche has been found';
 
+const errorToken = 'Token must be a valid token';
+
 class MatchService {
   public getAllMatches = async () => {
     const matches = await Matche.findAll({
@@ -51,7 +53,7 @@ class MatchService {
       inProgress: true,
     });
 
-    if (!matches) { throw new HttpError(401, 'Token must be a valid token'); }
+    if (!matches) { throw new HttpError(401, errorToken); }
 
     return matches;
   };
@@ -59,7 +61,22 @@ class MatchService {
   public updateMatches = async (id: number) => {
     const matches = await Matche.update({ inProgress: false }, { where: { id } });
 
-    if (!matches) { throw new HttpError(401, 'Token must be a valid token'); }
+    if (!matches) { throw new HttpError(401, errorToken); }
+
+    return matches;
+  };
+
+  public updateGoals = async (payload: any) => {
+    const { homeTeamGoals: homeGoals, awayTeamGoals: awayGoals, id } = payload;
+
+    const matches = await Matche.update(
+      { homeTeamGoals: homeGoals, awayTeamGoals: awayGoals },
+      { where: { id } },
+    );
+
+    if (!matches) { throw new HttpError(401, errorToken); }
+
+    console.log('=========> GOALS', matches);
 
     return matches;
   };

@@ -71,6 +71,20 @@ class MatcheController {
       return next(error);
     }
   };
+
+  public updateGoals = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    const payload = { homeTeamGoals, awayTeamGoals, id };
+
+    try {
+      await this.matcheService.updateGoals(payload);
+      return res.status(200).json({ message: 'Goalll!!!' });
+    } catch (error) {
+      return next(error);
+    }
+  };
 }
 
 export default MatcheController;
