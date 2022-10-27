@@ -26,7 +26,7 @@ Matche.init(
       allowNull: false,
 
     },
-    homeTeamGoal: {
+    homeTeamGoals: {
       type: INTEGER,
       allowNull: false,
 
