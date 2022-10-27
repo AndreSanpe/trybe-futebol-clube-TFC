@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import * as jwt from 'jsonwebtoken';
 import { IVerifyUser } from '../interfaces/IUser';
+import HttpError from './HttpError';
 
 export default class TokerManager {
   public static create({ email, role }: IVerifyUser): string {
@@ -13,7 +14,11 @@ export default class TokerManager {
 
   public static verify(token: string) {
     const secret = process.env.JWT_SECRET || 'secretToken';
-    const tokenValidation = jwt.verify(token, secret);
-    return tokenValidation as jwt.JwtPayload;
+    try {
+      const tokenValidation = jwt.verify(token, secret);
+      return tokenValidation as jwt.JwtPayload;
+    } catch (error) {
+      throw new HttpError(401, 'No matche has been created');
+    }
   }
 }
