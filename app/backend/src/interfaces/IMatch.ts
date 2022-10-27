@@ -1,4 +1,4 @@
-export default interface IMache {
+export default interface IMatch {
   homeTeam: number;
   awayTeam: number;
   homeTeamGoals: number;

@@ -1,5 +1,5 @@
 import UserRouter from './user.route';
 import TeamRouter from './team.route';
-import MatcheRouter from './matche.route';
+import MatchRouter from './match.route';
 
-export { UserRouter, TeamRouter, MatcheRouter };
+export { UserRouter, TeamRouter, MatchRouter };
