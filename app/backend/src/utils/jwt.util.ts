@@ -18,7 +18,7 @@ export default class TokerManager {
       const tokenValidation = jwt.verify(token, secret);
       return tokenValidation as jwt.JwtPayload;
     } catch (error) {
-      throw new HttpError(401, 'No matche has been created');
+      throw new HttpError(401, 'Token must be a valid token');
     }
   }
 }
