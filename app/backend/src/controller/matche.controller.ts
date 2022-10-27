@@ -4,6 +4,40 @@ import { MatcheService } from '../services';
 class MatcheController {
   constructor(private matcheService = new MatcheService()) { }
 
+  public getFilterTrueMatches = async (req: Request, res: Response, next: NextFunction) => {
+    const { inProgress } = req.query;
+
+    const validateInprogress = inProgress === 'true';
+    // console.log(validateInprogress);
+
+    if (!validateInprogress) {
+      return next();
+    }
+    try {
+      const filterTrueMatches = await this.matcheService.getFilterMatches(validateInprogress);
+      return res.status(200).json(filterTrueMatches);
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public getFilterFalseMatches = async (req: Request, res: Response, next: NextFunction) => {
+    const { inProgress } = req.query;
+
+    const validateInprogress = inProgress === 'false';
+    console.log(validateInprogress);
+
+    if (!validateInprogress) {
+      return next();
+    }
+    try {
+      const filterTrueMatches = await this.matcheService.getFilterMatches(false);
+      return res.status(200).json(filterTrueMatches);
+    } catch (error) {
+      return next(error);
+    }
+  };
+
   public getAllMatches = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const allMatches = await this.matcheService.getAllMatches();
@@ -12,16 +46,6 @@ class MatcheController {
       return next(error);
     }
   };
-
-  // public getOneTeam = async (req: Request, res: Response, next: NextFunction) => {
-  //   const { id } = req.params;
-  //   try {
-  //     const oneTeam = await this.matcheService.getOneTeam(Number(id));
-  //     return res.status(200).json(oneTeam);
-  //   } catch (error) {
-  //     return next(error);
-  //   }
-  // };
 }
 
 export default MatcheController;

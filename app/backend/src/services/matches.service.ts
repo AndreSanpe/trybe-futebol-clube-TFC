@@ -18,13 +18,20 @@ class MatcheService {
     return matches;
   };
 
-  // public getOneTeam = async (id:number) => {
-  //   const team = await Team.findOne({ where: { id } });
+  public getFilterMatches = async (validate: boolean) => {
+    console.log(validate);
 
-  //   if (!team) { throw new HttpError(401, errorMessage); }
+    const matches = await Matche.findAll({ where: { inProgress: validate },
+      include: [
+        { model: Team, as: 'teamHome', attributes: { exclude: ['id'] } },
+        { model: Team, as: 'teamAway', attributes: { exclude: ['id'] } },
+      ],
+    });
 
-  //   return team;
-  // };
+    if (!matches) { throw new HttpError(401, errorMessage); }
+
+    return matches;
+  };
 }
 
 export default MatcheService;
