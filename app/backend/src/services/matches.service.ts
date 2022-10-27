@@ -35,16 +35,23 @@ class MatchService {
   };
 
   public addMatches = async ({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals }: IMache) => {
-    const inProgress = true;
+    const searchHomeTeam = await Team.findOne({ where: { id: homeTeam } });
+    const searchAwayTeam = await Team.findOne({ where: { id: awayTeam } });
+    console.log(searchAwayTeam);
+
+    if (!searchHomeTeam || !searchAwayTeam) {
+      throw new HttpError(404, 'There is no team with such id!');
+    }
+
     const matches = await Matche.create({
       homeTeam,
       awayTeam,
       homeTeamGoals,
       awayTeamGoals,
-      inProgress,
+      inProgress: true,
     });
 
-    if (!matches) { throw new HttpError(401, 'No matche has been created'); }
+    if (!matches) { throw new HttpError(401, 'Token must be a valid token'); }
 
     return matches;
   };
@@ -52,7 +59,7 @@ class MatchService {
   public updateMatches = async (id: number) => {
     const matches = await Matche.update({ inProgress: false }, { where: { id } });
 
-    if (!matches) { throw new HttpError(401, 'No matche has been created'); }
+    if (!matches) { throw new HttpError(401, 'Token must be a valid token'); }
 
     return matches;
   };
