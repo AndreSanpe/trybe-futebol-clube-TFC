@@ -5,12 +5,10 @@ import user from './mocks/mock.user.db';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-// import UserModel from '../database/models/User';
 
 import { Response } from 'superagent';
 import { Model } from 'sequelize';
-// import User from '../database/models/User';
-// import { IUser } from '../interfaces/IUser';
+import Match from '../database/models/Match';
 
 chai.use(chaiHttp);
 
@@ -31,6 +29,7 @@ describe('Testing Match route', () => {
   // afterEach(()=>{
   //   (UserModel.findOne as sinon.SinonStub).restore();
   // })
+
   describe('We are testing Match route', () => {
       it('Just to see if it works', async () => {
         chaiHttpResponse = await chai.request(app).get('/matches')        
@@ -60,20 +59,41 @@ describe('We are testing Match route', () => {
     expect(chaiHttpResponse.status).to.equal(404);
   });
 })
+describe('We are testing Match route', () => {
+
+  it('Throw new error', async () => {
+    sinon
+    .stub(Match, "findOne")
+    .resolves(
+      undefined
+    );
+
+    chaiHttpResponse = await chai.request(app).get('/matches/4')        
+    expect(chaiHttpResponse.status).to.equal(404);
+
+    sinon.restore();
+  });
+
+})
 // describe('We are testing Match route', () => {
 
-  // it('Throw new error', async () => {
-  //   sinon
-  //   .stub(Model, "findOne")
-  //   .resolves(
-  //     undefined
-  //   );
+//   it('Add match', async () => {
+//     sinon
+//     .stub(Match, "create")
+//     .resolves({
+//       homeTeam: 4, 
+//       awayTeam: 1, 
+//       homeTeamGoals: 2,
+//       awayTeamGoals: 2
+//     }
+      
+//     );
 
-  //   chaiHttpResponse = await chai.request(app).get('/matches/4')        
-  //   expect(chaiHttpResponse.status).to.equal(200);
+//     chaiHttpResponse = await chai.request(app).post('/matches').set(`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY2Njg5NDIyMn0.uyO2dzoUNDwTne74QokuJ7l-dvbTGMxQCYGjBGIgV_c`)       
+//     expect(chaiHttpResponse.status).to.equal(404);
 
-  //   sinon.restore();
-  // });
+//     sinon.restore();
+//   });
 
 // })
 
