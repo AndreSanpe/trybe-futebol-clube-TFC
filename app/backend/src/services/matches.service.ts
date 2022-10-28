@@ -22,8 +22,6 @@ class MatchService {
   };
 
   public getFilterMatches = async (validate: boolean) => {
-    console.log(validate);
-
     const matches = await Matche.findAll({ where: { inProgress: validate },
       include: [
         { model: Team, as: 'teamHome', attributes: { exclude: ['id'] } },
@@ -39,7 +37,6 @@ class MatchService {
   public addMatches = async ({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals }: IMache) => {
     const searchHomeTeam = await Team.findOne({ where: { id: homeTeam } });
     const searchAwayTeam = await Team.findOne({ where: { id: awayTeam } });
-    console.log(searchAwayTeam);
 
     if (!searchHomeTeam || !searchAwayTeam) {
       throw new HttpError(404, 'There is no team with such id!');
@@ -75,8 +72,6 @@ class MatchService {
     );
 
     if (!matches) { throw new HttpError(401, errorToken); }
-
-    console.log('=========> GOALS', matches);
 
     return matches;
   };

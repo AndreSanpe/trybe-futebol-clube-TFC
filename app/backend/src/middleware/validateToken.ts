@@ -3,7 +3,6 @@ import TokerManager from '../utils/jwt.util';
 
 const validateToken = (req:Request, res:Response, next:NextFunction) => {
   const { authorization } = req.headers;
-  console.log(authorization);
 
   if (!authorization) {
     return res.status(401).json({ message: 'Invalid authorization' });

@@ -3,11 +3,8 @@ import login from './schemas/login';
 
 const loginMid = (req:Request, res:Response, next:NextFunction) => {
   const { error } = login.validate(req.body);
-  console.log('error ====>>>>>', error);
 
   if (error) {
-    console.log(error);
-
     return res.status(400).json({ message: error.message });
   }
 

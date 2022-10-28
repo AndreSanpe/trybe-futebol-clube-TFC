@@ -8,7 +8,6 @@ class MatcheController {
     const { inProgress } = req.query;
 
     const validateInprogress = inProgress === 'true';
-    // console.log(validateInprogress);
 
     if (!validateInprogress) {
       return next();
@@ -25,7 +24,6 @@ class MatcheController {
     const { inProgress } = req.query;
 
     const validateInprogress = inProgress === 'false';
-    console.log(validateInprogress);
 
     if (!validateInprogress) {
       return next();

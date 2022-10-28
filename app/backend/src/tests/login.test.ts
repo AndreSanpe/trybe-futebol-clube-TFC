@@ -9,7 +9,7 @@ import UserModel from '../database/models/User';
 
 import { Response } from 'superagent';
 import User from '../database/models/User';
-import { IUser } from '../interfaces/IUser';
+import jwt from 'jsonwebtoken';
 
 chai.use(chaiHttp);
 
@@ -28,7 +28,7 @@ describe('Testing login route', () => {
   });
 
   afterEach(()=>{
-    (UserModel.findOne as sinon.SinonStub).restore();
+    sinon.restore();
   })
   describe('First we are going to test the "/" route', () => {
       it('testing if the we can access the route /', async () => {
@@ -40,17 +40,21 @@ describe('Testing login route', () => {
   describe('test the "/login" route', () => {
     it('testing if we can access the route "/login"', async () => {
       chaiHttpResponse = await chai.request(app).post('/login')
-      expect(chaiHttpResponse.status).to.equal(201);
+      expect(chaiHttpResponse.status).to.equal(400);
     });
 
   })
   describe('test the "model" route', () => {
     it('testing if we can access db"', async () => {
-      chaiHttpResponse = (await chai.request(app).post('/login')).body({
+      chaiHttpResponse = await chai.request(app).post('/login').send({
         email: "admin@admin.com",
         password: "secret_admin"
       })
-      expect(chaiHttpResponse.status).to.equal(201);
+      expect(chaiHttpResponse.status).to.equal(200);
+    });
+    it('testing token wrong"', async () => {
+      chaiHttpResponse = await chai.request(app).get('/login/validate').set({authorization:'erroTest'})
+      expect(chaiHttpResponse.status).to.equal(401);
     });
 
   })
