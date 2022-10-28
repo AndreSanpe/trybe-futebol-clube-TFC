@@ -9,7 +9,7 @@ const errorToken = 'Token must be a valid token';
 
 class MatchService {
   public getAllMatches = async () => {
-    const matches = await Match.findAll({
+    const [matches] = await Match.findAll({
       include: [
         { model: Team, as: 'teamHome', attributes: { exclude: ['id'] } },
         { model: Team, as: 'teamAway', attributes: { exclude: ['id'] } },

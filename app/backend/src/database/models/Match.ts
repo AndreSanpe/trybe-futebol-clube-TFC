@@ -4,10 +4,10 @@ import Team from './Team';
 
 class Match extends Model {
   id!: number;
-  homeTeam!: string;
-  homeTeamGoal!: string;
-  awayTeam!: string;
-  awayTeamGoals!: string;
+  homeTeam!: number;
+  homeTeamGoal!: number;
+  awayTeam!: number;
+  awayTeamGoals!: number;
   inProgress:number;
   createdAt: Date;
   updatedAt: Date;
