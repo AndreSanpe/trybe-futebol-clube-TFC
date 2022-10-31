@@ -14,6 +14,21 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
+const token: String = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY2Njg5NDIyMn0.uyO2dzoUNDwTne74QokuJ7l-dvbTGMxQCYGjBGIgV_c';
+
+interface IaddMatch{
+  homeTeam: number; 
+  awayTeam: number; 
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+};
+
+const addMatch: IaddMatch = {
+  homeTeam: 4, 
+  awayTeam: 1, 
+  homeTeamGoals: 2,
+  awayTeamGoals: 2
+};
 describe('Testing Match route', () => {
 
     let chaiHttpResponse: Response;
@@ -80,19 +95,13 @@ describe('We are testing Match route', () => {
 //   it('Add match', async () => {
 //     sinon
 //     .stub(Match, "create")
-//     .resolves({
-//       homeTeam: 4, 
-//       awayTeam: 1, 
-//       homeTeamGoals: 2,
-//       awayTeamGoals: 2
-//     }
-      
-//     );
+//     .resolves(undefined);
 
-//     chaiHttpResponse = await chai.request(app).post('/matches').set(`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY2Njg5NDIyMn0.uyO2dzoUNDwTne74QokuJ7l-dvbTGMxQCYGjBGIgV_c`)       
+//     chaiHttpResponse = await chai.request(app).post('/matches').set(token).send(addMatch);   
 //     expect(chaiHttpResponse.status).to.equal(404);
 
 //     sinon.restore();
+
 //   });
 
 // })
