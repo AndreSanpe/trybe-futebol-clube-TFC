@@ -29,6 +29,16 @@ const addMatch: IaddMatch = {
   homeTeamGoals: 2,
   awayTeamGoals: 2
 };
+
+const returnCreate: any = {
+  "id": 50,
+  "homeTeam": 4,
+  "awayTeam": 1,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 2,
+  "inProgress": true
+};
+
 describe('Testing Match route', () => {
 
     let chaiHttpResponse: Response;
@@ -90,21 +100,36 @@ describe('We are testing Match route', () => {
   });
 
 })
-// describe('We are testing Match route', () => {
+describe('We are testing Match route', () => {
 
-//   it('Add match', async () => {
-//     sinon
-//     .stub(Match, "create")
-//     .resolves(undefined);
+  it('Add match', async () => {
+    sinon
+    .stub(Match, "create")
+    .resolves(returnCreate);
 
-//     chaiHttpResponse = await chai.request(app).post('/matches').set(token).send(addMatch);   
-//     expect(chaiHttpResponse.status).to.equal(404);
+    chaiHttpResponse = await chai.request(app).post('/matches').set({Authorization: token}).send(addMatch);   
+    expect(chaiHttpResponse.status).to.equal(201);
 
-//     sinon.restore();
+    sinon.restore();
 
-//   });
+  });
 
-// })
+})
+describe('We are testing Match route', () => {
+
+  it('Update match error', async () => {
+    sinon
+    .stub(Match, "update")
+    .resolves(returnCreate);
+
+    chaiHttpResponse = await chai.request(app).post('/matches/1').set({Authorization: token}).send(addMatch);   
+    expect(chaiHttpResponse.status).to.equal(404);
+
+    sinon.restore();
+
+  });
+
+})
 
 });
 
